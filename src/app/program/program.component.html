@@ -1,0 +1,75 @@
+<div class="hep_page cmn_page">
+	<div class="head">
+		<h3 style="margin-top: 7px">Program</h3><br>
+		<span style="color:#fff;">Tap Each Exercise To View Instructions</span>
+		<div class="menu_icon">
+			<a href="javascript:void(0)" id="sidebarCollapse"><i class="fa fa-bars" aria-hidden="true"></i></a>
+		</div>
+	</div>
+	<div class="hep_btm">
+		<div class="hep_btm_inner">
+			<ul>
+				<li><a href="javascript:void(0)" *ngIf = "data != 0" [class.disabled]="isCurrentDate || data == 0"  data-toggle="modal" data-target="#work_popup">{{ (isCurrentDate ? 'You Completed Your Hep ' : 'Mark As Completed Today') }}</a></li>
+			</ul>
+			<div class="hep_list" *ngIf="programService.programs | async as programs;">
+				<div class="text-center" *ngIf="!programs.length">
+					<h3>No Home Exercise Program Assigned</h3>
+				</div>
+				<ul>
+					<li  *ngFor="let program of programs" ><a href="javascript:void(0)" routerLink = "/program/{{id}}/program-detail/{{program.exercise_id}}/{{program.treatment_id}}" >
+						<div class="list_im">
+							<img src="{{program.tbl_exercise.image}}" alt="">
+						</div>
+						<div class="list_title">
+							<h5 class="exercise-title">{{program.tbl_exercise.title}}</h5>
+						</div>
+						<div class="list_detail">
+							<div class="list_detail_left">
+								Sets: <span>{{program.sets}}</span>
+							</div>
+							<div class="list_detail_right">
+								Reps: <span>{{program.reps}}</span>
+							</div>
+						</div>
+						<div class="list_detail">
+								<div class="list_detail_full exercise-title">
+									{{program.perform}}
+								</div>
+							</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div id="progress"></div>
+	</div>
+</div>
+</div>
+
+<div class="modal cmn_popup" id="work_popup">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h4>Did You Complete Your Hep today?</h4> 
+				<ul>
+					<li><a href="javascript:void(0)" (click)= "myFunc()" data-dismiss="modal">Yes</a></li>
+					<li><a href="javascript:void(0)" data-dismiss="modal">No</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal cmn_popup" #todayModal id="exampleModal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h4>Congratulations for completing your home exercise program today.</h4> 
+        <ul>
+          <li><a href="javascript:void(0)" data-dismiss="modal">Ok</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

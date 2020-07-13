@@ -1,0 +1,241 @@
+<div class="home_pain_after cmn_page">
+  <div class="head head_height">
+    <h3>
+      <a routerLink = "/home/{{patient_id}}">
+        <img src="assets/images/logo_small.png" alt="Avior Patient">
+      </a>
+    </h3>
+    <div class="menu_icon">
+      <a href="javascript:void(0)" id="sidebarCollapse"><i class="fa fa-bars" aria-hidden="true"></i></a>
+    </div>
+
+    <div class="pain_level_box" >
+      <div style="font-size:24px; color:#fff;">Recovery Tracking</div>
+      <div class="pain_level_box_inner">
+        <div style="width:100%; height: 200px" >
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home_pain_after_txt_main">
+    <div class="home_pain_after_txt_inner">
+      <div class="home_pain_after_txt_inner_in">
+        <div class="pain_level_box" *ngIf="+isCurrentDatePain" >
+          <span>Track Your Recovery Progress Here!<br>Login Daily To Update Your Progress.</span>
+          <p style="padding-bottom:10px;">On A Scale Of 0-10, How Is Your Injury Currently Interfering With Your Lifestyle?</p>
+          <ul>
+            <li *ngFor="let pain of pain_level;let i=index;">
+              <a href="javascript:void(0)" [class.disabled]="!isCurrentDatePain" (click)="setRating(i)">
+                <div [class.active1]="pain.status" class="round_circul color_{{ pain.class }} {{ (pain.status) ? 'active' : '' }}"></div>
+                <span>{{ pain.display }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="pain_level_update" *ngIf="+isFunctionAsk">
+            <span>Track Your Recovery By Filling Out a Brief Survey Each Week!</span>
+            <ul>
+              <li><a href="javascript:void(0)" routerLink = "/functional-survey/{{patient_id}}" >Take Progress Survey</a></li>
+            </ul>
+          </div>
+        <div class="home_pain_after_one" *ngIf="showSetYourGoal">
+          <ul>
+            <li><a href="javascript:void(0)">Set A Goal</a></li>
+            <li><a href="javascript:void(0)" *ngFor="let goal of pendingGoals;">{{ goal.goals }}</a></li>
+            <li><a href="javascript:void(0)" data-toggle="modal" data-target="#cmn_popup">SET GOALS</a></li>
+          </ul>
+        </div>
+
+        <div class="home_pain_after_one" style="padding-top: 0 !important" *ngIf="!showSetYourGoal">
+          <ul>
+            <div class="goals_one" style="text-align: center; padding-top: 0 !important; padding-right: 0 !important">
+              <!-- <button class="btn" style="height: 2vmin !important; float: right; padding-top: 0 !important; padding-right: 0 !important" data-toggle="modal" data-target="#goal_info"><span class="mdi mdi-information-outline" style=" font-size:5vmin !important; padding-top: 0 !important"></span></button> -->
+              <br><h4>Current Goals</h4>
+              <p style="padding-top:10px; padding-bottom:10px;">You Can Track Your Completed Goals In The 'My Goals' Tab</p>
+              
+              <ul>
+                <li *ngFor="let goal of pendingGoals;">
+                  <label class="control control--radio">{{ goal.goals }}
+                    <input type="radio" [value]="goal.id" name="goal_id" [(ngModel)]="goal_id" (click) = "gModal(goal.goals)" checked="checked" />
+
+                    <div class="control__indicator"></div>
+                  </label>
+                </li>
+                <li>
+                  <a href="javascript:void(0)" data-toggle="modal" data-target="#cmn_popup">Add A Goal</a>
+                </li>
+              </ul>
+            </div>
+          </ul>
+        </div>
+
+        <div class="home_pain_after_box mr_btm20">
+          <h4>Home Exercise Program Weekly Progress</h4>
+          <div class="box_round">
+            <div class="progress">
+              <div class="inner">
+                <img class = "weight-lift-img" src="assets/images/weightlifting-50.png">
+              </div>
+              <div id="progress"></div>
+            </div>
+          </div>
+          <span>{{ size }}/{{ data }}</span>
+          <div class="home_pain_after_one">
+            <a href="javascript:void(0)" *ngIf = "data != 0" [class.disabled]="isCurrentDate || data == 0" data-toggle="modal" data-target="#work_popup">{{ (isCurrentDate ? 'Keep Working Hard!' : 'I Did My Hep Today!') }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal cmn_popup" #completeModal id="cmn_popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm"  novalidate class="pt-3">
+        <div class="modal-body">
+          <h4>New Goal</h4>
+          <textarea   name="goal" [(ngModel)]="model.goal" #goal="ngModel"  rows="5" cols="50" id="goal"   required placeholder="Input Goal Here"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type='button' class='btn btn-custom' data-dismiss='modal'>Cancel</button>
+          <button type="submit" class="btn btn-custom" data-dismiss="completeModal">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Popup Start -->
+<div class="modal cmn_popup" #goalModal id="goal_set">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4>Did You Complete Your "{{ goalName }}"?</h4>
+        <ul>
+          <li><a href="javascript:void(0)" (click)="addGoal()" data-dismiss="modal">Yes</a></li>
+          <li><a href="javascript:void(0)" data-dismiss="modal">No</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Popup End -->
+
+<!-- Google Review Popup -->
+
+<div class="modal cmn_popup" #reviewModal id = "review_popup">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:#333333;">Share Your Experience!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" style= "float: left">
+          <p style="font-size: 18px;">Are you enjoying your experience with {{ clinic_name }}? <br><br>If so, write them a positive review!</p>
+        </div>
+
+      <div class="modal-footer" style="display:flex;flex-direction:column;">
+          <div style="width:100%;display:block;">
+          <a class='btn btn-primary' (click) = 'hideReviewPopUp()' href = {{googleReviewLink}} target = '_blank' style="float:right;">
+            Submit a Review
+            </a>
+            <button  data-dismiss='modal' class='btn btn-outline-secondary' style="margin-right: 10px;float:right;"> Skip </button>
+          </div>
+          <div style="width:100%;margin-top: 10px;display:block;">
+              <button  *ngIf="differenceInTime > five_weeks" (click) = 'rejectReview()' class='btn btn-secondary' style="font-size: 10px;float:right; margin-right:4px;"> Don't Ask Me Again </button>
+            </div>
+
+        </div>
+
+        
+
+    </div>
+  </div>
+</div>
+
+<!-- Popup End -->
+
+<!-- Popup Start -->
+<div class="modal cmn_popup" id="work_popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4>Did You Complete Your Home Excercise program?</h4>
+        <ul>
+          <li><a href="javascript:void(0)" (click)= "myFunc()" data-dismiss="modal">Yes</a></li>
+          <li><a href="javascript:void(0)" data-dismiss="modal">No</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Popup End -->
+
+<div class="modal cmn_popup" #weeklyModal id="exampleModal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h4>Congratulations for completing your home exercise program weekly</h4>
+        <ul>
+          <li><a href="javascript:void(0)" data-dismiss="modal">Ok</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal cmn_popup" #todayModal id="exampleModal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h4>Congratulations for completing your home exercise program today</h4>
+        <ul>
+          <li><a href="javascript:void(0)" data-dismiss="modal">Ok</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal cmn_popup" #goalCompleteModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h4>Congratulations for completing your goal</h4>
+        <ul>
+          <li><a href="javascript:void(0)" data-dismiss="modal">Ok</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup Start -->
+<div class="modal cmn_popup" #goalInfo id="goal_info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4>TRIAL INFO BUTTON</h4>
+        <ul>
+          <li><a href="javascript:void(0)" (click)="addGoal()" data-dismiss="modal">Yes</a></li>
+          <li><a href="javascript:void(0)" data-dismiss="modal">No</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Popup End -->
+
+<div class="overlay"></div>

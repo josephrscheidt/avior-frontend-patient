@@ -1,0 +1,14 @@
+<div class="login_page" id="login_bg">
+<div class="login_page_main">
+  <img src="assets/logo/logo.png">
+  <p>Changing The Way Patients Engage With Their Care</p>
+  <ul>
+    <li><a href="javascript:void(0)" routerLink="/login">Login</a></li>
+    <!-- <li><a href="javascript:void(0)" routerLink="/forgot-password">New User?</a></li> -->
+  </ul>
+  <ul>
+    <li><a href="javascript:void(0)" (click)="onClick()">Login As Demo Patient</a></li>
+  </ul>
+  <div class="alert alert-{{ message.responseType }} text-center" style="margin-top: 10px; width: 100%; float: left;" *ngIf = "message.responseMessage">{{ message.response }}</div>
+</div>
+</div>

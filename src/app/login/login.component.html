@@ -1,0 +1,61 @@
+<div class="login_page" id="login_bg">
+  <div class="login_page_main login-page">
+    <img src="assets/logo/logo.png">
+    <!-- <p>Login</p> -->
+    <div class="login_form">
+     <form (ngSubmit)="user.form.valid && onSubmit(user)" #user="ngForm" novalidate class="pt-3">
+      <div [ngClass]="{disabledDiv: !common.isActiveDiv}">
+        <div class="form-group">
+          <input type="email" class="form-control form-control-lg" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': user.submitted && email.invalid }" placeholder="Email Address" required />
+          <div *ngIf="user.submitted && email.invalid" class="invalid-feedback-splash">
+            <div *ngIf="email.errors.required">Email is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control form-control-lg" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': user.submitted && password.invalid }" placeholder="Password" required />
+          <div *ngIf="user.submitted && password.invalid" class="invalid-feedback-splash">
+            <div *ngIf="password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <div class="form_btn">
+          <input type="submit" name="" value="SIGN IN">
+          <!-- <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" >SIGN IN</button> -->
+        </div>
+      </div>
+      <div class="alert alert-{{ message.responseType }} text-center" style="margin-top: 10px; width: 100%; float: left;" *ngIf = "message.responseMessage">{{ message.response }}</div>
+      <!-- <div class="form_forgot_account">
+        <div class="text_right">
+          <a routerLink = "/forgot-password" class="auth-link text-black">Forgot Password?</a>
+        </div>
+        <hr style="height:20pt; visibility:hidden;"/>
+				<div>
+					<font color="white">By using Avior you are agreeing to Avior's <a href = "http://avioranalytics.net/terms-of-use/" style="border-bottom: 1px solid white; color:white" target="_blank">Terms of Use</a></font>
+				</div>
+        <div class="text_left">
+          Don't have an account? <a routerLink = "/signup" class="text-primary">Create</a>
+        </div>
+      </div> -->
+            <!-- <div class="my-2 d-flex justify-content-between align-items-center">
+              <a routerLink = "/forgot-password" class="auth-link text-black">Forgot password?</a>
+            </div>
+            <div class="text-center mt-4 font-weight-light">
+              Don't have an account? <a routerLink = "/signup" class="text-primary">Create</a>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-- <div class="form_fild">
+        <input type="text" name="" placeholder="Enter Email">
+      </div>
+      <div class="form_fild">
+        <input type="password" name="" placeholder="Enter Password">
+      </div>
+    -->
+
+ <!--  <a routerLink="/about-info">
+          <input type="submit" name="" value="Login">
+        </a> -->

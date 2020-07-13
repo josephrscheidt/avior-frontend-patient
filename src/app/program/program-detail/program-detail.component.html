@@ -1,0 +1,33 @@
+<div class="hep_detail_page cmn_page">
+	<div class="head">
+		<a style="margin-top: 7px" href="javascript:void(0)" routerLink = "/program/{{id}}" ><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+		<h3 style="margin-top: 7px">Program Detail</h3>
+		<div class="menu_icon">
+			<a href="javascript:void(0)" id="sidebarCollapse"><i class="fa fa-bars" aria-hidden="true"></i></a>
+		</div>
+	</div>
+	<div class="hep_detail_bnr">
+		<div class="hep_detail_bnr_inner">
+			<img src="{{ exercise.image }}" alt="{{ exercise.title }}">
+		</div>
+	</div>
+	<div class="hep_detail_txt">
+		<div class="hep_detail_txt_inner">
+			<h6>{{ exercise.title }}</h6>
+			<span>Instructions</span> 
+			<p [innerHtml] = "exercise.description"></p>
+		</div>
+	</div>
+	<div class="hep_detail_txt">
+		<div class="hep_detail_txt_inner">
+			<span>Notes</span>
+			<p [innerHtml] = "exercise_data.perform"></p>
+		</div>
+	</div>
+	<div class="hep_detail_txt">
+		<div class="hep_detail_txt_inner">
+			<span>Purpose</span>
+			<p [innerHtml] = "exercise.purpose"></p>
+		</div>
+	</div>
+</div>

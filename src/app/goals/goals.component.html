@@ -1,0 +1,86 @@
+<div class="goals cmn_page">
+	<div class="head head_height">
+		<h3>
+			<a routerLink = "/home/{{id}}">
+				<img src="assets/images/logo_small.png" alt="Avior Patient">
+			</a>
+		</h3>
+		<div class="menu_icon">
+			<a href="javascript:void(0)" id="sidebarCollapse"><i class="fa fa-bars" aria-hidden="true"></i></a>
+		</div>
+		<div class="pain_level_box" >
+			<div style="font-size:24px; color:#fff;">Goal Tracking</div>
+			<div class="pain_level_box_inner">
+				<!-- <div *ngIf = "!points.length" style="padding-top: 50px;">
+					<h3>Not enough data to display graph</h3>
+				</div> -->
+				<div style="width:100%;">
+					<canvas id="goalchart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="goals_txt_main">
+		<div class="goals_txt_inner">
+			<div class="goals_one">
+				<h5>Current Goals</h5>
+				<div *ngIf="!pendingGoals.length" style="margin-bottom: 20px;">No Goal set yet, set one now.</div>
+				<ul>
+					<li *ngFor="let goal of pendingGoals;">
+						<label class="control control--radio">{{ goal.goals }}
+							<input type="radio" [value]="goal.id" name="goal_id" [(ngModel)]="goal_id" checked="checked" data-toggle="modal" data-target="#goal_set" />
+
+							<div class="control__indicator"></div>
+						</label>
+					</li>
+					<li>
+						
+						<a href="javascript:void(0)" data-toggle="modal" data-target="#cmn_popup">Add A Goal</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="goals_box mr_btm20">
+				<h5>Completed Goals</h5> 
+				<div *ngIf="!doneGoals.length">No Goal completed yet.</div>
+				<ul>
+					<li *ngFor="let goal of doneGoals;">
+						<span></span> <p>{{ goal.goals }}</p>
+					</li>
+				</ul> 
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Popup Start -->
+<div class="modal cmn_popup" id="goal_set">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h4>Did You Complete Your Goal?</h4> 
+				<ul>
+					<li><a href="javascript:void(0)" (click)="addGoal()" data-dismiss="modal">Yes</a></li>
+					<li><a href="javascript:void(0)" data-dismiss="modal">No</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Popup End -->
+<div class="modal cmn_popup" #completeModal id="cmn_popup">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm"  novalidate class="pt-3">
+				<div class="modal-body">
+					<h4>New Goal</h4>
+					<textarea   name="goal" [(ngModel)]="model.goal" #goal="ngModel"  rows="5" cols="50" id="goal"   required placeholder="Input Goal Here"></textarea>
+				</div>
+				<div class="modal-footer">
+						<button type='button' class='btn btn-custom' data-dismiss='modal'>Cancel</button>
+						<button type="submit" class="btn btn-custom" data-dismiss="completeModal">Save</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

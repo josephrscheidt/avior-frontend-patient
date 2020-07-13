@@ -1,0 +1,51 @@
+<div class="login_page" id="sign_bg">
+	<div class="login_page_main signup-page">
+		<img src="assets/logo/logo.png">
+		<p>Signup</p>
+		<div class="signup_form">
+			<form (ngSubmit)="onSubmit()" novalidate [formGroup] = "signupForm" class="pt-3" novalidate>
+				<div [ngClass]="{disabledDiv: !common.isActiveDiv}">
+					<div class="form-group">
+						<div class="form-group">
+							<input type="text" class="form-control form-control-lg" formControlName = "name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required placeholder="Full Name"/>
+							<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+								<div *ngIf="f.name.errors.required">Name is required</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control form-control-lg" formControlName = "email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required  placeholder="Email Address"/>
+						<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+							<div *ngIf="f.email.errors.required">Email is required</div>
+							<div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control form-control-lg" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required  placeholder="Password"/>
+						<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+							<div *ngIf="f.password.errors.required">Password is required</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control form-control-lg" formControlName = "contact_no" [ngClass]="{ 'is-invalid': submitted && f.contact_no.errors }" required placeholder="Contact Number"/>
+						<div *ngIf="submitted && f.contact_no.errors && (f.contact_no.dirty || f.contact_no.touched)" class="invalid-feedback">
+							<div *ngIf="f.contact_no.errors.required">Contact Number is required</div>
+							<div *ngIf="f.contact_no.errors.pattern">Please enter a Numbers only.</div>
+						</div>
+					</div>
+					<div class="form_btn">
+						<input type="submit" name="" value="Signup">
+						<!-- <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button> -->
+					</div>
+				</div>
+				<div class="alert alert-{{ common.responseType }} text-center" style="margin-top: 10px; width: 100%; float: left;" *ngIf = "common.responseMessage">{{ common.response }}</div>
+			</form>
+			<div class="form_forgot_account">
+				
+				<div class="text_right">
+					Already have an account? <a routerLink = "/login" class="auth-link text-black">Login here</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

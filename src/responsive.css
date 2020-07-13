@@ -1,0 +1,88 @@
+/* ========================= Start media screen 601px to 767px =========================  */
+@media screen and (min-width:601px) and (max-width:767px) {
+	/* Start About Your Injury page css */
+	.about_your_injury_bnr_inner .about_your_injury_bnr_txt h4{ font-size:44px; padding:62px 0; }
+	/* Close About Your Injury page css */
+
+	/* Start About Your Injury Info page css */
+	.about_your_injury_info_txt_inner p{ font-size:16px; padding-bottom:15px; }
+	/* Close About Your Injury Info page css */
+
+	/* Start Hep page css */
+	.hep_btm .hep_btm_inner .hep_list ul li .list_im{ height:160px; }
+	/* Close Hep page css */	
+
+	.about_your_injury_bnr_inner .about_your_injury_bnr_im { min-height: 100%; }
+}
+/* ========================= Close media screen 601px to 767px =========================  */
+
+/* ========================= Start media screen 481px to 600px =========================  */
+@media screen and (min-width:481px) and (max-width:600px) {
+	/* Start About Your Injury page css */
+	.about_your_injury_bnr_inner .about_your_injury_bnr_txt h4{ font-size:34px; padding:50px 0; }
+	/* Close About Your Injury page css */
+
+	/* Start About Your Injury Info page css */
+	.about_your_injury_info_txt_inner p{ font-size:16px; padding-bottom:15px; }
+	/* Close About Your Injury Info page css */
+
+	/* Start Hep page css */
+	.hep_btm .hep_btm_inner .hep_list ul li .list_im{ height:140px; }
+	/* Close Hep page css */
+
+	/* Start Signup page css */
+	#sign_bg{ height:100% !important; text-align:center; }
+	#sign_bg .login_page_main{ position:relative; top:0; left:0; transform:none; padding:50px 0; float:none; display:inline-block; }
+	/* Close Signup page css */
+	.about_your_injury_bnr_inner .about_your_injury_bnr_im { min-height: 100%; }
+}
+/* ========================= Close media screen 481px to 600px =========================  */
+
+/* ========================= Start media screen 480px =========================  */
+@media screen and (max-width:480px) {
+	/* Start About Your Injury page css */
+	.about_your_injury_bnr_inner .about_your_injury_bnr_txt h4{ font-size:24px; padding:30px 0; }
+	/* Close About Your Injury page css */
+
+	/* Start About Your Injury Info page css */
+	.about_your_injury_info_txt_inner p{ font-size:14px; padding-bottom:15px; }
+	/* Close About Your Injury Info page css */
+	
+	/* Start Functional Survey css */
+	.functional_survey_rating_inner .rating_box ul li{ width:15%; }
+	/* Close Functional Survey css */
+
+	/* Start Hep page css */
+	.hep_btm .hep_btm_inner .hep_list ul li .list_im{ height:100px; }
+	.hep_btm .hep_btm_inner .hep_list ul li .list_title h5{ font-size:12px; }
+	/* Close Hep page css */
+
+	/* Start Signup page css */
+	#sign_bg{ height:100% !important; }
+	#sign_bg .login_page_main{ position:relative; top:0; left:0; transform:none; padding:50px 0; }
+	/* Close Signup page css */
+	
+	/* Start Home After Goals page css */
+	.home_after_goals_txt_inner .home_after_goals_one ul li .control{ font-size:16px; }
+	/* Close Home After Goals page css */
+	
+	/* Start Home After Add Goals page css */
+	.home_after_addgoals_txt_inner .home_after_addgoals_one ul li .control{ font-size:16px; }
+	/* Close Home After Add Goals page css */
+	
+	/* Start Home Pain Level page css */
+	.home_pain_level_txt_inner .pain_level_box ul li{ width:15%; }
+	/* Close Home Pain Level page css */
+
+	/* Start Goals page css */
+	.goals_txt_inner .goals_one ul li .control{ font-size:16px; }
+	/* Close Goals page css */
+	.about_your_injury_bnr_inner .about_your_injury_bnr_im { min-height: 100%; }
+}
+/* ========================= Close media screen 480px =========================  */
+
+/* ========================= Start media screen 380px =========================  */
+@media screen and (max-width:360px) {
+	
+}
+/* ========================= Close media screen 380px ========================= */ 
